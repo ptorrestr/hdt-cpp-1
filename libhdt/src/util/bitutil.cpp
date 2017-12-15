@@ -30,4 +30,7 @@ template<> void bitsetHelper<8>(size_t *e, size_t p) { e[p/64] |= (((size_t)1)<<
 template<> void bitcleanHelper<4>(size_t *e, size_t p) { e[p/32] &= ~(((size_t)1)<<(p%32)); }
 template<> void bitcleanHelper<8>(size_t *e, size_t p) { e[p/64] &= ~(((size_t)1)<<(p%64)); }
 
+bool bitget(size_t *e, size_t p) { return bitgetHelper<sizeof(size_t)>(e, p); }
+void bitset(size_t *e, size_t p) { bitsetHelper<sizeof(size_t)>(e, p); }
+void bitclean(size_t *e, size_t p) { bitcleanHelper<sizeof(size_t)>(e, p); }
 }
