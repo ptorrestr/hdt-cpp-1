@@ -35,14 +35,14 @@ matrix:
     - os: linux
       env: 
         - export ARCH32=1
-        - export HDT_CPP=g++
+        - export HDT_CPP=g++-multilib
       
 before_install:
   - if [ ! -z "$ARCH32" ]; then 
       echo "installing i386 runtime";
       sudo dpkg --add-architecture i386;
       sudo apt-get update;
-      sudo apt-get -y install gcc-multilib libc6-dev-i386;
+      sudo apt-get -y install gcc-multilib libc6-dev-i386 zlib1g-dev;
     fi
   - pushd $HOME
   # Download and install Serd
