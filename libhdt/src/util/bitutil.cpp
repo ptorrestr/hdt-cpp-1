@@ -21,4 +21,13 @@ extern const unsigned char popcount_tab[256] = {
 		3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,
 };
 
+template<> bool bitgetHelper<4>(size_t *e, size_t p) { return (e[p/32] >> (p%32)) & 1; }
+template<> bool bitgetHelper<8>(size_t *e, size_t p) { return (e[p/64] >> (p%64)) & 1; }
+
+template<> void bitsetHelper<4>(size_t *e, size_t p) { e[p/32] |= (((size_t)1)<<(p%32)); }
+template<> void bitsetHelper<8>(size_t *e, size_t p) { e[p/64] |= (((size_t)1)<<(p%64)); }
+
+template<> void bitcleanHelper<4>(size_t *e, size_t p) { e[p/32] &= ~(((size_t)1)<<(p%32)); }
+template<> void bitcleanHelper<8>(size_t *e, size_t p) { e[p/64] &= ~(((size_t)1)<<(p%64)); }
+
 }

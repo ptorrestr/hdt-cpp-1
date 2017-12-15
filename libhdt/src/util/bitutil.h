@@ -67,18 +67,12 @@ inline uint32_t wordSelect1(uint64_t value, uint64_t rank) {
 
 /** reads bit p from e */
 template<size_t> bool bitgetHelper(size_t *e, size_t p);
-template<> bool bitgetHelper<4>(size_t *e, size_t p) { return (e[p/32] >> (p%32)) & 1; }
-template<> bool bitgetHelper<8>(size_t *e, size_t p) { return (e[p/64] >> (p%64)) & 1; }
 inline bool bitget(size_t *e, size_t p) {	return bitgetHelper<sizeof(size_t)>(e, p); }
 
 template<size_t> void bitsetHelper(size_t *e, size_t p); 
-template<> void bitsetHelper<4>(size_t *e, size_t p) { e[p/32] |= (((size_t)1)<<(p%32)); }
-template<> void bitsetHelper<8>(size_t *e, size_t p) { e[p/64] |= (((size_t)1)<<(p%64)); }
 inline void bitset(size_t *e, size_t p) { bitsetHelper<sizeof(size_t)>(e, p); }
 
 template<size_t> void bitcleanHelper(size_t *e, size_t p);
-template<> void bitcleanHelper<4>(size_t *e, size_t p) { e[p/32] &= ~(((size_t)1)<<(p%32)); }
-template<> void bitcleanHelper<8>(size_t *e, size_t p) { e[p/64] &= ~(((size_t)1)<<(p%64)); }
 inline void bitclean(size_t *e, size_t p) { bitcleanHelper<sizeof(size_t)>(e, p); }
 
 
