@@ -34,8 +34,8 @@ matrix:
       env: export HDT_CPP=g++-6
     - os: linux
       env: 
-        - ARCH32=1
-        - HDT_CPP=g++
+        - export ARCH32=1
+        - export HDT_CPP=g++
       
 before_install:
   - if [ -z "$ARCH32" ]; then 
