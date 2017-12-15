@@ -71,9 +71,9 @@ template<> bool bitgetHelper<4>(size_t *e, size_t p) { return (e[p/32] >> (p%32)
 template<> bool bitgetHelper<8>(size_t *e, size_t p) { return (e[p/64] >> (p%64)) & 1; }
 inline bool bitget(size_t *e, size_t p) {	return bitgetHelper<sizeof(size_t)>(e, p); }
 
-template<size_t> void bitset(size_t *e, size_t p); 
-template<> void bitset<4>(size_t *e, size_t p) { return { e[p/32] |= (((size_t)1)<<(p%32)); }
-template<> void bitset<8>(size_t *e, size_t p) { return { e[p/64] |= (((size_t)1)<<(p%64)); }
+template<size_t> void bitsetHelper(size_t *e, size_t p); 
+template<> void bitsetHelper<4>(size_t *e, size_t p) { e[p/32] |= (((size_t)1)<<(p%32)); }
+template<> void bitsetHelper<8>(size_t *e, size_t p) { e[p/64] |= (((size_t)1)<<(p%64)); }
 inline void bitset(size_t *e, size_t p) { bitsetHelper<sizeof(size_t)>(e, p); }
 
 template<size_t> void bitcleanHelper(size_t *e, size_t p);
