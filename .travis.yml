@@ -37,9 +37,9 @@ matrix:
       
 before_install:
   - if [ -z "$ARCH32" ]; then 
-      sudo dpkg --add-architecture i386
-      sudo apt-get update
-      sudo apt-get -y install gcc-multilib libc6-dev-i386
+      sudo dpkg --add-architecture i386;
+      sudo apt-get update;
+      sudo apt-get -y install gcc-multilib libc6-dev-i386;
     fi
   - pushd $HOME
   # Download and install Serd
