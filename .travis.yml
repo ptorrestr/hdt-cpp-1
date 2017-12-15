@@ -33,10 +33,13 @@ matrix:
           packages: ['g++-6', 'zlib1g-dev']
       env: export HDT_CPP=g++-6
     - os: linux
-      env: ARCH32=1
+      env: 
+        - ARCH32=1
+        - HDT_CPP=g++
       
 before_install:
   - if [ -z "$ARCH32" ]; then 
+      echo "installing i386 runtime"
       sudo dpkg --add-architecture i386;
       sudo apt-get update;
       sudo apt-get -y install gcc-multilib libc6-dev-i386;
