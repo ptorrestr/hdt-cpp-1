@@ -48,7 +48,11 @@ before_install:
   # Download and install Serd
   # - curl -s http://download.drobilla.net/serd-0.24.0.tar.bz2 | tar -xj
   - git clone https://github.com/drobilla/serd.git
-  - pushd serd* && ./waf configure --prefix=$LOCAL && ./waf && ./waf install && popd
+  - if [ ! -z "$ARCH32" ]; then
+      pushd serd* && ./waf configure --prefix=$LOCAL CFLAGS=-m32 CXXFLAGS=-m32 LDFLAGS=-m32 && ./waf && ./waf install && popd
+    else
+      pushd serd* && ./waf configure --prefix=$LOCAL && ./waf && ./waf install && popd;
+    fi
   # Set up build environment
   - $HDT_CPP --version
   - popd
