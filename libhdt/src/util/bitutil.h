@@ -66,36 +66,21 @@ inline uint32_t wordSelect1(uint64_t value, uint64_t rank) {
 #define SIZET_SIZE (sizeof(size_t)*8)
 
 /** reads bit p from e */
-inline bool bitget(size_t *e, size_t p) {
-	return (e[p/SIZET_SIZE] >> (p%SIZET_SIZE)) & 1;
-}
+template<size_t> bool bitgetHelper(size_t *e, size_t p);
+template<> bool bitgetHelper<4>(size_t *e, size_t p) { return (e[p/32] >> (p%32)) & 1; }
+template<> bool bitgetHelper<8>(size_t *e, size_t p) { return (e[p/64] >> (p%64)) & 1; }
+inline bool bitget(size_t *e, size_t p) {	return bitgetHelper<sizeof(size_t)>(e, p); }
 
-/** sets bit p in e */
-inline void bitset(size_t * e, size_t p) {
-	e[p/SIZET_SIZE] |= (((size_t)1)<<(p%SIZET_SIZE));
-}
+template<size_t> void bitset(size_t *e, size_t p); 
+template<> void bitset<4>(size_t *e, size_t p) { return { e[p/32] |= (((size_t)1)<<(p%32)); }
+template<> void bitset<8>(size_t *e, size_t p) { return { e[p/64] |= (((size_t)1)<<(p%64)); }
+inline void bitset(size_t *e, size_t p) { bitsetHelper<sizeof(size_t)>(e, p); }
 
-/** cleans bit p in e */
-inline void bitclean(size_t * e, size_t p) {
-	e[p/SIZET_SIZE] &= ~(((size_t)1)<<(p%SIZET_SIZE));
-}
+template<size_t> void bitcleanHelper(size_t *e, size_t p);
+template<> void bitcleanHelper<4>(size_t *e, size_t p) { e[p/32] &= ~(((size_t)1)<<(p%32)); }
+template<> void bitcleanHelper<8>(size_t *e, size_t p) { e[p/64] &= ~(((size_t)1)<<(p%64)); }
+inline void bitclean(size_t *e, size_t p) { bitcleanHelper<sizeof(size_t)>(e, p); }
 
-
-
-/** reads bit p from e */
-inline bool bitget(uint32_t *e, size_t p) {
-	return (e[p/32] >> (p%32)) & 1;
-}
-
-/** sets bit p in e */
-inline void bitset(uint32_t * e, size_t p) {
-	e[p/32] |= (1<<(p%32));
-}
-
-/** cleans bit p in e */
-inline void bitclean(uint32_t * e, size_t p) {
-	e[p/32] &= ~(1<<(p%32));
-}
 
 inline bool bitget64(uint64_t *e, uint64_t p) {
 	return (e[p/64] >> (p%64)) & 1;
