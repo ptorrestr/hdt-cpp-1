@@ -32,7 +32,15 @@ matrix:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-6', 'zlib1g-dev']
       env: export HDT_CPP=g++-6
+    - os: linux
+      env: ARCH32=1
+      
 before_install:
+  - if [ -z "$ARCH32" ]; then 
+      sudo dpkg --add-architecture i386
+      sudo apt-get update
+      sudo apt-get -y install gcc-multilib libc6-dev-i386
+    fi
   - pushd $HOME
   # Download and install Serd
   # - curl -s http://download.drobilla.net/serd-0.24.0.tar.bz2 | tar -xj
