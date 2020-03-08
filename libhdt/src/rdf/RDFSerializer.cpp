@@ -4,6 +4,7 @@
  *  Created on: 11/07/2011
  *      Author: mck
  */
+#include "config.h"
 #include <stdexcept>
 #include "RDFSerializer.hpp"
 #ifdef HAVE_SERD
