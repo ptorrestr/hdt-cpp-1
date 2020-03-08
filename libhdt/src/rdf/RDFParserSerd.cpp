@@ -1,5 +1,5 @@
+#include "config.h"
 #ifdef HAVE_SERD
-
 #ifdef HAVE_LIBZ
 #include <zlib.h>
 #endif

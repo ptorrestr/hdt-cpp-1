@@ -1,3 +1,4 @@
+#include "config.h"
 #ifdef HAVE_KYOTO
 #include <kcpolydb.h>
 #endif

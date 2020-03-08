@@ -26,6 +26,7 @@
  *   Mario Arias:               mario.arias@gmail.com
  *
  */
+#include "config.h"
 #include <stdexcept>
 #include <iostream>
 #include <sys/stat.h>

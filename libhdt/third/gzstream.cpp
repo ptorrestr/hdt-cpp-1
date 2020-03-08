@@ -25,7 +25,7 @@
 // Standard streambuf implementation following Nicolai Josuttis, "The 
 // Standard C++ Library".
 // ============================================================================
-
+#include "config.h"
 #include "gzstream.h"
 #include <iostream>
 #include <string.h>  // for memcpy
